@@ -1,0 +1,67 @@
+import { Meta } from "@storybook/addon-docs";
+
+<Meta title="Packages/PixiWrapped/Core/App" />
+
+## Example of use App
+
+```ts
+import{ Application as PixiApplication } from "pixi.js";
+import PixiWrapped from "@src-path/packages/PixiWrapped";
+
+export default function MyComponent() {
+  const appDivRef = useRef<HTMLDivElement>(null!);
+
+  let pixiApp: PixiApplication;
+
+  useEffect(() => {
+    const pixiApp = PixiWrapped.Core.App({
+      width: 300,
+      height: 300,
+    });
+
+    ...
+
+    pixiApp.stage.addChild(item);
+
+    appDivRef.current.appendChild(pixiApp.view);
+
+    pixiApp.start();
+
+    return () => {
+      pixiApp.destroy(true, true);
+    };
+  }, []);
+
+  return <div ref={appDivRef} />;
+}
+```
+
+### Props
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Example</th>
+  </tr>
+  <tr>
+    <td>width (optional)</td>
+    <td>number</td>
+    <td>300</td>
+  </tr>
+  <tr>
+    <td>height (optional)</td>
+    <td>number</td>
+    <td>300</td>
+  </tr>
+  <tr>
+    <td>backgroundColor (optional)</td>
+    <td>number</td>
+    <td>0xffffff</td>
+  </tr>
+  <tr>
+    <td>resizeTo (optional)</td>
+    <td>Window | HTMLElement</td>
+    <td>document.documentElement</td>
+  </tr>
+</table>
